@@ -103,6 +103,8 @@ header .menu-btn {
 .side-menu.open {
     left: 0;
     color: #198534;
+    background: rgba(205, 205, 205, 0.8); /* transparent white tinted bg */
+    box-shadow: 3px 0 10px -2px #000000;
 }
 
 .side-menu .close-btn {
@@ -112,10 +114,23 @@ header .menu-btn {
     font-size: 1.5rem;
     cursor: pointer;
     margin-bottom: 20px;
+    align-self: flex-end;
+}
+
+.side-menu nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 35px;
+}
+
+.side-menu nav a {
+    margin-bottom: 10px;
+    text-decoration: none;
 }
 
 .side-menu nav button {
-    background: #444;
+    background: #3f3f3f;
     color: #fff;
     border: none;
     padding: 10px 20px;
