@@ -57,7 +57,7 @@ header .menu-btn {
     left: -250px;
     width: 250px;
     height: 100%;
-    background: #333;
+    background: rgba(28, 28, 28, 0.8);
     color: #198534;
     display: flex;
     flex-direction: column;
@@ -69,7 +69,8 @@ header .menu-btn {
 .side-menu.open {
     left: 0;
     color: #198534;
-    background: rgba(0,0,0,0.8); /* transparent black tinted bg */
+    /* transparent black tinted bg */
+    /* background: rgba(0,0,0,0.8); */
     box-shadow: 3px 0 10px -2px #000000;
 }s
 
@@ -86,7 +87,7 @@ header .menu-btn {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 35px;
+    padding-top: 55px;
 }
 
 .side-menu nav a {
@@ -98,8 +99,9 @@ header .menu-btn {
     background: #3f3f3f;
     color: #fff;
     border: none;
-    padding: 10px 20px;
+    padding: 15px 30px; /* 10px 20px before */
     margin: 10px 0;
+    font-size: 1rem; 
     cursor: pointer;
     text-align: left;
     transition: background 0.2s;
