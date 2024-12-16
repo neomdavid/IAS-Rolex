@@ -91,7 +91,7 @@ header .menu-btn {
     left: -250px;
     width: 250px;
     height: 100%;
-    background: rgba(226, 226, 226, 0.8); /* transparent white tinted bg */
+    background: rgba(226, 226, 226, 0.8);
     color: #198534;
     display: flex;
     flex-direction: column;
@@ -129,20 +129,32 @@ header .menu-btn {
 }
 
 .side-menu nav button {
-    background: #3f3f3f;
-    color: #fff;
+    background: transparent;
+    color: #198534;
     border: none;
-    padding: 15px 30px;
+    padding: 15px 0;
     margin: 10px 0;
-    font-size: 1rem; 
+    font-size: 1rem;
+    font-weight: bold;
     cursor: pointer;
-    text-align: left;
-    transition: background 0.2s;
+    text-align: center;
+    font-family: 'EB Garamond', serif;
+    transition: background 0.2s, transform 0.3s;
+    min-width: 225px; 
+    box-sizing: border-box;
 }
 
+
 .side-menu nav button:hover {
-    background: #555;
+    background: #198534; 
+    color: #fff; 
+    transform: scale(1.1); 
+    width: 100%; 
+    box-sizing: border-box; 
+    position: relative; 
+    left: 0; 
 }
+
 
 /* Slideshow */
 .slideshow {
