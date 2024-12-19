@@ -65,6 +65,7 @@ header .menu-btn {
     z-index: 1001;
 }
 
+
 /* Open side menu */
 .side-menu.open {
     left: 0;
@@ -91,13 +92,13 @@ header .menu-btn {
     padding-top: 15px;
 }
 
-
 .side-menu nav a {
     margin-bottom: 10px;
     text-decoration: none;
 }
 
-.side-menu nav button {
+.side-menu nav button,
+#side-menu #auth-button { 
     background: transparent;
     color: #ffffff;
     border: none;
@@ -111,18 +112,18 @@ header .menu-btn {
     transition: background 0.2s, transform 0.3s;
     min-width: 225px;
     box-sizing: border-box;
-
+    text-transform: uppercase;
 }
 
-
-.side-menu nav button:hover {
+.side-menu nav button:hover,
+#side-menu #auth-button:hover { 
     background: #198534;
     color: #fff;
-    transform: scale(1.1); 
-    width: 100%; 
-    box-sizing: border-box; 
-    position: relative; 
-    left: 0; 
+    transform: scale(1.1);
+    width: 100%;
+    box-sizing: border-box;
+    position: relative;
+    left: 0;
 }
 
 

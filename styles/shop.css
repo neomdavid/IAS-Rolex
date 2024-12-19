@@ -128,7 +128,8 @@ header .menu-btn {
     text-decoration: none;
 }
 
-.side-menu nav button {
+.side-menu nav button ,
+#side-menu #auth-button{
     background: transparent;
     color: #198534;
     border: none;
@@ -142,10 +143,12 @@ header .menu-btn {
     transition: background 0.2s, transform 0.3s;
     min-width: 225px; 
     box-sizing: border-box;
+    text-transform: uppercase;
 }
 
 
-.side-menu nav button:hover {
+.side-menu nav button:hover,
+#side-menu #auth-button:hover {
     background: #198534; 
     color: #fff; 
     transform: scale(1.1); 
