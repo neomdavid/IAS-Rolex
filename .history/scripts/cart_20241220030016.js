@@ -269,5 +269,17 @@ async function removeCartItem(cartItemId) {
   }
 }
 
+// Function to update the cart item count in the header or a cart display element
+function updateCartCount() {
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const cartCountElement = document.getElementById("cart-count");
+  if (cartCountElement) {
+    cartCountElement.innerText = cart.reduce(
+      (total, item) => total + item.quantity,
+      0
+    ); // Total items in the cart, considering quantity
+  }
+}
+
 // Call fetchCart() on page load to populate the cart display
 window.onload = fetchCart;

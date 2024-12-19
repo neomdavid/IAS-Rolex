@@ -1,16 +1,29 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Check if the user has a token in localStorage
-    const token = localStorage.getItem('token'); // Assuming the token is stored with the key 'token'
+    // Check if the user has a valid token in localStorage
+    const token = localStorage.getItem('token');  // Assuming the token is stored with the key 'token'
   
     // Shop link redirect logic
     const shopLink = document.getElementById('shop-link');
   
-    if (!token) {
-      // If there is no token, redirect to the login page when clicking the shop link
+    if (!token || !isValidToken(token)) {
+      // If there is no token or it's invalid, redirect to the login page
       shopLink.addEventListener('click', (event) => {
         event.preventDefault(); // Prevent default action
         window.location.href = 'login.html'; // Redirect to login page
       });
+    }
+  
+    // Function to validate the token
+    function isValidToken(token) {
+      try {
+        // If your token is a JWT, you can decode it and check its expiration
+        const payload = JSON.parse(atob(token.split('.')[1])); // Decode JWT
+        const expiration = payload.exp * 1000; // Convert expiration to milliseconds
+        return expiration > Date.now(); // Check if token is still valid
+      } catch (e) {
+        // If token is not a valid JWT or cannot be decoded, it's invalid
+        return false;
+      }
     }
   
     // Side menu toggle

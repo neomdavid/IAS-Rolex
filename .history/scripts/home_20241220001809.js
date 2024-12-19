@@ -1,18 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Check if the user has a token in localStorage
-    const token = localStorage.getItem('token'); // Assuming the token is stored with the key 'token'
-  
-    // Shop link redirect logic
-    const shopLink = document.getElementById('shop-link');
-  
-    if (!token) {
-      // If there is no token, redirect to the login page when clicking the shop link
-      shopLink.addEventListener('click', (event) => {
-        event.preventDefault(); // Prevent default action
-        window.location.href = 'login.html'; // Redirect to login page
-      });
-    }
-  
     // Side menu toggle
     const sideMenu = document.getElementById('side-menu');
     const menuBtn = document.querySelector('.menu-btn');

@@ -1,15 +1,3 @@
-const sideMenu = document.getElementById("side-menu");
-const menuBtn = document.querySelector(".menu-btn");
-const closeBtn = document.querySelector(".close-btn");
-
-menuBtn.addEventListener("click", () => {
-  sideMenu.classList.add("open"); // Show side menu
-});
-
-closeBtn.addEventListener("click", () => {
-  sideMenu.classList.remove("open"); // Hide side menu
-});
-
 // Fetching watches from the backend API
 async function fetchWatches() {
   try {
@@ -136,7 +124,10 @@ async function updateCartCount() {
       console.log(data);
 
       // Calculate total items considering quantity from backend response
-      const totalItems = data.cart[0].items.length;
+      const totalItems = data.cart.reduce(
+        (total, item) => total + item.quantity,
+        0
+      );
 
       const cartCountElement = document.getElementById("cart-count");
       if (cartCountElement) {

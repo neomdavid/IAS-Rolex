@@ -66,13 +66,26 @@ async function getWatchById(watchId) {
 
 // Function to update the cart display on the page
 // Function to update the cart display on the page
-function updateCartDisplay(cartItems) {
+// Function to update the cart display on the page
+function updateCartDisplay(cartItems, totalItems, totalPrice) {
   const cartContainer = document.getElementById("cart-items");
   const totalPriceElement = document.getElementById("total-price");
+  const totalItemsElement = document.getElementById("total-items"); // Add reference to the total items element
+  const summaryTotalPriceElement = document.getElementById(
+    "summary-total-price"
+  ); // Add reference to the summary total price element
   const placeOrderButton = document.getElementById("place-order-btn");
+
   cartContainer.innerHTML = ""; // Clear the cart display
 
-  let totalPrice = 0;
+  // Update total price and total items display
+  totalItemsElement.innerText = totalItems; // Update total items
+  summaryTotalPriceElement.innerText = `₱${totalPrice.toLocaleString()}`; // Update summary total price
+  totalPriceElement.innerText = `₱${totalPrice.toLocaleString()}`; // Update total price
+
+  // Disable the "Place Order" button if the cart is empty
+  placeOrderButton.disabled = cartItems.length === 0;
+  placeOrderButton.style.opacity = cartItems.length === 0 ? "0.5" : "1";
 
   cartItems.forEach((item, index) => {
     console.log(item);
@@ -127,70 +140,44 @@ function updateCartDisplay(cartItems) {
     cartItemDiv.appendChild(itemDetails);
 
     cartContainer.appendChild(cartItemDiv);
-
-    // Update total price
-    totalPrice += price * (item.quantity || 1);
   });
-
-  // Update total price display
-  totalPriceElement.innerText = `₱${totalPrice.toLocaleString()}`;
-
-  // Disable the "Place Order" button if the cart is empty
-  placeOrderButton.disabled = cartItems.length === 0;
-  placeOrderButton.style.opacity = cartItems.length === 0 ? "0.5" : "1";
 }
 
 // Function to add an item to the cart
-// Function to add an item to the cart
-async function addToCart(watchId, name, img, price, quantity = 1) {
-  console.log(watchId, name, img, price, quantity);
+async function addToCart(watchId, watchName, watchImage, watchPrice) {
+  const token = localStorage.getItem("authToken");
+
+  if (!token) {
+    alert("Please log in to add items to your cart.");
+    return;
+  }
+
+  const body = {
+    watchId: watchId,
+    quantity: 1, // Add one by default, modify as needed
+  };
 
   try {
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-    // Check if the item already exists in the cart
-    const existingItem = cart.find((item) => item.watchId === watchId);
-
-    if (existingItem) {
-      // If item already exists, increase the quantity
-      existingItem.quantity += quantity;
-    } else {
-      // If it's a new item, add it to the cart
-      const cartItem = { watchId, quantity, name, img, price };
-      cart.push(cartItem);
-    }
-
-    // Save the updated cart to localStorage
-    localStorage.setItem("cart", JSON.stringify(cart));
-
-    console.log("Item added to cart:", cart);
-
-    // Send the request to the backend to add the product to the user's cart (optional if you're syncing with the backend)
-    const cartData = { watchId, quantity, name, img, price };
-    const response = await fetch(
-      "http://localhost:3000/api/v1/carts/cart/items",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`, // Assuming authToken is stored in localStorage
-        },
-        body: JSON.stringify(cartData),
-      }
-    );
+    const response = await fetch("http://localhost:3000/api/v1/cart/items", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(body),
+    });
 
     const data = await response.json();
-
     if (response.ok) {
-      alert("Item added to cart successfully!");
+      alert("Item added to cart.");
+      fetchCart(); // Refresh the cart display
     } else {
       console.error("Failed to add item to cart:", data.message);
+      alert("Failed to add item to the cart.");
     }
-
-    // Update the cart count in the header
-    updateCartCount();
   } catch (error) {
     console.error("Error adding item to cart:", error);
+    alert("An error occurred while adding the item to the cart.");
   }
 }
 

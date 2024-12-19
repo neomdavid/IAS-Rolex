@@ -1,15 +1,3 @@
-const sideMenu = document.getElementById("side-menu");
-const menuBtn = document.querySelector(".menu-btn");
-const closeBtn = document.querySelector(".close-btn");
-
-menuBtn.addEventListener("click", () => {
-  sideMenu.classList.add("open"); // Show side menu
-});
-
-closeBtn.addEventListener("click", () => {
-  sideMenu.classList.remove("open"); // Hide side menu
-});
-
 // Fetching watches from the backend API
 async function fetchWatches() {
   try {
@@ -121,32 +109,13 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // Function to update the cart item count in the header or a cart display element
-async function updateCartCount() {
-  try {
-    // Fetch the cart from the backend (assuming the cart is tied to the logged-in user)
-    const response = await fetch("http://localhost:3000/api/v1/carts/cart", {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`, // Use the token for auth
-      },
-    });
-
-    if (response.ok) {
-      const data = await response.json();
-      console.log(data);
-
-      // Calculate total items considering quantity from backend response
-      const totalItems = data.cart[0].items.length;
-
-      const cartCountElement = document.getElementById("cart-count");
-      if (cartCountElement) {
-        cartCountElement.innerText = totalItems; // Update the cart count
-      }
-    } else {
-      console.error("Failed to fetch cart data:", response.statusText);
-    }
-  } catch (error) {
-    console.error("Error fetching cart:", error);
+function updateCartCount() {
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const cartCountElement = document.getElementById("cart-count");
+  if (cartCountElement) {
+    // Total items in the cart, considering quantity
+    const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+    cartCountElement.innerText = totalItems;
   }
 }
 
