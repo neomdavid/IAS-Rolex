@@ -18,7 +18,7 @@ async function fetchWatches() {
       "http://localhost:3000/api/v1/carts/cart",
       {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`, 
+          Authorization: `Bearer ${localStorage.getItem("token")}`, // Replace with your token management
         },
       }
     );
@@ -74,6 +74,7 @@ function renderWatches(watches, cart) {
   });
 
   // Update results count dynamically
+  document.getElementById("product-count").textContent = watches.length;
 
   // Initialize category filter (show all watches)
   filterProducts("all");

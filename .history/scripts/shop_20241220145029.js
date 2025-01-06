@@ -18,7 +18,7 @@ async function fetchWatches() {
       "http://localhost:3000/api/v1/carts/cart",
       {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`, 
+          Authorization: `Bearer ${localStorage.getItem("token")}`, // Replace with your token management
         },
       }
     );
