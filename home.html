@@ -8,28 +8,28 @@
   </head>
 
   <body>
-    <!-- Header -->
     <header id="header">
-      <button class="menu-btn" onclick="toggleMenu()">☰</button>
+      <button class="menu-btn" onclick="">☰</button>
       <img src="images/logo.jpg" alt="Rolex Logo" class="header-logo" />
     </header>
 
-    <!-- Slide-Out Menu -->
     <div class="side-menu" id="side-menu">
-      <button class="close-btn" onclick="toggleMenu()">&#10005;</button>
+      <button class="close-btn" onclick="">&#10005;</button>
       <nav>
-        <a href="home.html">
-          <button>HOME</button>
-        </a>
-        <a href="shop.html" id="shop-link">
-          <button>SHOP</button>
-        </a>
+        <div>
+          <a href="home.html">
+            <button>HOME</button>
+          </a>
+          <a href="shop.html" id="shop-link">
+            <button>SHOP</button>
+          </a>
+        </div>
+
+        <button id="auth-button">Sign in</button>
       </nav>
     </div>
 
-    <!-- Main Content -->
     <main>
-      <!-- Panel 1 -->
       <div class="panel panel-1">
         <video autoplay muted loop>
           <source src="videos/panel1.mp4" type="video/mp4" />
@@ -41,7 +41,6 @@
         </div>
       </div>
 
-      <!-- Panel 2 -->
       <div class="panel panel-2">
         <div class="text-content">
           <h2>Our 2024 Collection</h2>
@@ -71,7 +70,6 @@
         </div>
       </div>
 
-      <!-- Panel 3 -->
       <div class="panel panel-3">
         <div class="content">
           <h2>
@@ -93,7 +91,6 @@
         </div>
       </div>
 
-      <!-- Panel 4 -->
       <div class="panel panel-4">
         <video autoplay muted loop>
           <source src="videos/Submariner.mp4" type="video/mp4" />
@@ -111,7 +108,6 @@
         </div>
       </div>
 
-      <!-- Panel 5 -->
       <div class="panel panel-5">
         <img src="images/DayDate.png" alt="Image" />
         <div class="text">
@@ -126,7 +122,6 @@
         </div>
       </div>
 
-      <!-- Panel 6 -->
       <div class="panel panel-6">
         <img src="images/wirst.jpg" alt="Image" />
         <div class="text">
@@ -139,7 +134,6 @@
         </div>
       </div>
 
-      <!-- Panel 7 -->
       <div class="panel panel-7">
         <div class="text">
           <h2>Rolex: A Legacy of Excellence</h2>
@@ -152,7 +146,6 @@
         <img src="images/history.webp" alt="Image" />
       </div>
 
-      <!-- Panel 8 - Find a Boutique -->
       <div class="panel panel-8">
         <div class="map-container">
           <div class="image-wrapper">
@@ -191,7 +184,6 @@
         </div>
       </div>
 
-      <!-- Subscribe Section -->
       <div class="panel-9">
         <div class="section left">
           <h2>Join Our Newsletter</h2>
@@ -203,12 +195,10 @@
           </p>
         </div>
         <div class="section right">
-          <!-- Subscribe Button -->
           <button class="subscribe-btn" id="subscribe-btn">Subscribe</button>
         </div>
       </div>
 
-      <!-- Modal for email input -->
       <div id="subscribeModal" class="subscribe-modal">
         <div class="modal-content">
           <span class="close-btn" id="close-btn">&times;</span>
@@ -226,7 +216,6 @@
       </div>
     </main>
 
-    <!-- Footer -->
     <footer>
       <div class="footer-top">
         <div class="branding">
@@ -290,6 +279,6 @@
       </div>
     </footer>
 
-    <script src="scripts/home.js"></script>
+    <script src="scripts/home.js" type="module"></script>
   </body>
 </html>

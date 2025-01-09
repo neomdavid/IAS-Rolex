@@ -1,16 +1,5 @@
-const sideMenu = document.getElementById("side-menu");
-const menuBtn = document.querySelector(".menu-btn");
-const closeBtn = document.querySelector(".close-btn");
+import { renderAuthButton } from "./utils/utils.js";
 
-menuBtn.addEventListener("click", () => {
-  sideMenu.classList.add("open"); // Show side menu
-});
-
-closeBtn.addEventListener("click", () => {
-  sideMenu.classList.remove("open"); // Hide side menu
-});
-
-// Fetching watches from the backend API
 async function fetchWatches() {
   try {
     const response = await fetch("http://localhost:3000/api/v1/watches");
@@ -18,7 +7,7 @@ async function fetchWatches() {
       "http://localhost:3000/api/v1/carts/cart",
       {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`, 
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       }
     );
@@ -118,40 +107,40 @@ function filterProducts(filterValue) {
   allProducts.forEach((product) => {
     const gender = product.getAttribute("data-gender");
 
-    // Check if it matches the filter
-    const isVisible = filterValue === "all" || filterValue === gender;
+    // Check if the product matches the filter
+    const isVisible = filterValue === "all" || gender === filterValue;
 
-    // Toggle display based on match
+    // Toggle visibility
     product.style.display = isVisible ? "block" : "none";
+
+    // Count visible products
     if (isVisible) visibleCount++;
   });
 
   // Update results count dynamically
   const resultsCount = document.getElementById("results-count");
-  resultsCount.textContent = `Showing 1–${visibleCount} of ${allProducts.length} results`;
+  if (resultsCount) {
+    resultsCount.textContent = `Showing 1–${visibleCount} of ${visibleCount} results`;
+  }
 }
 
 // Event Listeners for Men/Women Tab Clicks
 document.addEventListener("DOMContentLoaded", () => {
-  const menTab = document.getElementById("men-tab");
-  const womenTab = document.getElementById("women-tab");
-  const allTab = document.getElementById("all-tab");
+  const sortDropdown = document.getElementById("sort");
 
-  if (menTab) {
-    menTab.addEventListener("click", () => {
-      filterProducts("men");
-    });
-  }
+  if (sortDropdown) {
+    sortDropdown.addEventListener("change", () => {
+      const selectedValue = sortDropdown.value; // Get the selected option's value
+      console.log(`Selected filter: ${selectedValue}`);
 
-  if (womenTab) {
-    womenTab.addEventListener("click", () => {
-      filterProducts("women");
-    });
-  }
-
-  if (allTab) {
-    allTab.addEventListener("click", () => {
-      filterProducts("all");
+      // Map the values to your filter logic
+      if (selectedValue === "all") {
+        filterProducts("all");
+      } else if (selectedValue === "mens") {
+        filterProducts("men");
+      } else if (selectedValue === "womens") {
+        filterProducts("women");
+      }
     });
   }
 });
@@ -185,8 +174,14 @@ async function updateCartCount() {
   }
 }
 
-// Call this function when the page loads to set the initial cart count and fetch watches
 window.onload = () => {
+  const token = localStorage.getItem("token");
+
+  if (!token) {
+    window.location.href = "login.html";
+    return;
+  }
+  renderAuthButton();
   updateCartCount();
   fetchWatches();
 };

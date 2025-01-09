@@ -12,15 +12,12 @@
   </head>
 
   <body>
-    <!-- Header -->
     <header id="header">
-      <!-- Slide Menu Button -->
-      <button class="menu-btn" onclick="toggleMenu()">☰</button>
+      <button class="menu-btn" onclick="">☰</button>
       <a href="home.html">
         <img src="images/logo.jpg" alt="Rolex Logo" class="header-logo" />
       </a>
 
-      <!-- Cart Button -->
       <div class="cart-container">
         <a href="cart.html" class="cart-icon">
           <img src="images/cart.png" alt="Cart" class="cart-image" />
@@ -29,22 +26,23 @@
       </div>
     </header>
 
-    <!-- Slide-Out Menu -->
     <div class="side-menu" id="side-menu">
-      <button class="close-btn" onclick="toggleMenu()">&#10005;</button>
+      <button class="close-btn" onclick="">&#10005;</button>
       <nav>
-        <a href="home.html">
-          <button>HOME</button>
-        </a>
-        <a href="#" id="shop-link">
-          <button>SHOP</button>
-        </a>
+        <div>
+          <a href="home.html">
+            <button>HOME</button>
+          </a>
+          <a href="shop.html" id="shop-link">
+            <button>SHOP</button>
+          </a>
+        </div>
+
+        <button id="auth-button">Sign in</button>
       </nav>
     </div>
 
-    <!-- Main Content -->
     <main>
-      <!-- Slideshow -->
       <section class="slideshow">
         <div class="slides">
           <img src="images/slideshow1.jpg" alt="slide 1" />
@@ -56,28 +54,24 @@
         </div>
       </section>
 
-      <!-- Shop Header -->
       <section class="shop-header">
         <h1>Shop Watches</h1>
-        <!-- New -->
         <p id="results-count">
           Showing results: <span id="product-count">0</span>
         </p>
         <div class="sorting">
           <label for="sort">Sort by:</label>
           <select id="sort">
-            <option value="all">All</option>
-            <option value="mens">Men's Watches</option>
-            <option value="womens">Women's Watches</option>
+            <option value="all" id="all-tab">All</option>
+            <option value="mens" id="men-tab">Men's Watches</option>
+            <option value="womens" id="women-tab">Women's Watches</option>
           </select>
         </div>
       </section>
 
-      <!-- Product Grid -->
       <section class="shop-grid" id="product-grid"></section>
     </main>
 
-    <!-- Footer -->
     <footer>
       <div class="footer-top">
         <div class="branding">
@@ -141,6 +135,6 @@
       </div>
     </footer>
 
-    <script src="./scripts/shop.js"></script>
+    <script src="./scripts/shop.js" type="module"></script>
   </body>
 </html>

@@ -1,9 +1,8 @@
-// Function to check login status by communicating with the backend
 async function isLoggedIn() {
   try {
     const response = await fetch("/api/auth/check", {
       method: "GET",
-      credentials: "include", // Include cookies for session-based authentication
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
@@ -11,7 +10,7 @@ async function isLoggedIn() {
 
     if (response.ok) {
       const data = await response.json();
-      return data.isLoggedIn; // Expecting { isLoggedIn: true/false } in response
+      return data.isLoggedIn;
     } else {
       return false;
     }
@@ -21,7 +20,6 @@ async function isLoggedIn() {
   }
 }
 
-// Redirect based on login status
 document
   .getElementById("shop-link")
   .addEventListener("click", async function (event) {
@@ -37,7 +35,6 @@ document
     }
   });
 
-// Logout function
 async function logout() {
   try {
     const response = await fetch("/api/auth/logout", {
@@ -60,12 +57,10 @@ async function logout() {
   }
 }
 
-// Function to handle auth action (login/logout)
 async function handleAuthAction() {
   const loggedIn = await isLoggedIn();
 
   if (loggedIn) {
-    // Log out the user
     try {
       const response = await fetch("/api/auth/logout", {
         method: "POST",
@@ -77,7 +72,7 @@ async function handleAuthAction() {
 
       if (response.ok) {
         alert("You have been logged out.");
-        updateAuthButton(); // Update button after logout
+        updateAuthButton();
       } else {
         alert("Logout failed. Please try again.");
       }
@@ -86,12 +81,10 @@ async function handleAuthAction() {
       alert("An error occurred during logout.");
     }
   } else {
-    // Redirect to login page
     window.location.href = "login.html";
   }
 }
 
-// Function to dynamically update the auth button
 async function updateAuthButton() {
   const loggedIn = await isLoggedIn();
   const authButton = document.getElementById("auth-button");
@@ -103,5 +96,4 @@ async function updateAuthButton() {
   }
 }
 
-// Call this function on page load and whenever login/logout occurs
 window.onload = updateAuthButton;
