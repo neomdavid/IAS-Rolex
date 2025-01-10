@@ -173,6 +173,7 @@ async function updateCartCount() {
     console.error("Error fetching cart:", error);
   }
 }
+window.addToCart = addToCart;
 
 window.onload = () => {
   const token = localStorage.getItem("token");
